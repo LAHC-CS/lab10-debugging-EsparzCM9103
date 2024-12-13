@@ -1,43 +1,40 @@
-class Exercise_1 {
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+import java.io.*;
 
-    //number of elements we want to check for
-    public static int numElements = 100;
+public class Exercise_1 {
 
-    public static void main(String[] args) {
-
-        // Check if given a single argument
-        if(args.length == 1) {
-            System.out.println("./Exercise_1 value");
-            return;
-        }
-
-        int n = args[0];
-
-        //create new array of numElements long
-        int[] arr = new int[numElement];
-
-        //populate array from 0 to numElements
-        for(int i = 0; i <= numElements; i++) {
-            arr[i] = i;
-        }
-        
-        return;
-
-        //find Divisable by n
-        findDivisableBy(arr, n);
+    public Exercise_1() {
+        // Constructor
     }
 
-    public static void findDivisableBy(int arr[], int n) {
-
-        // for every element of the array
-        for(int i = 0; i <= numElements; i==i+1) {
-
-            // check if element is divisible by n
-            if((arr[i] % n) = 0) {
-                //print if divisibile
-                System.out.print arr[i] + ",")
-            }
+    public static void main(String[] args) {
+        for (int i = 0; i < 10; i++) {
+            System.out.println(i * Integer.parseInt(args[0]));
         }
-        System.out.printIn("");
+    }
+
+    @Test
+    public void testExercise_1() {
+        PrintStream originalOut = System.out;
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
+        String[] args = {"10"};
+        // action
+        Exercise_1.main(args);
+
+        // assertion
+        String expected = "0\n10\n20\n30\n40\n50\n60\n70\n80\n90";
+        try {
+            assertEquals(expected, bos.toString().trim().replace("\r", ""));
+        } catch (AssertionError e) {
+            System.setOut(originalOut);
+            System.out.println("Got: \"" + bos.toString().trim() + "\" Expected: \"" + expected.trim() + "\"");
+            throw e;
+        }
+
+        // undo the binding in System
+        System.setOut(originalOut);
     }
 }
